@@ -1,14 +1,28 @@
 <template>
     <div>
-        <h1>여기는 테스트 코드입니다</h1>
-        <h2>리스트의 컴퓨티드 데이터 입니다. {{dateId}}</h2>
-        <ul>
-            <li v-for="(item, index) in dateList" :key="item.taskId">
-                <span>{{index}}</span>
-                <span>{{item.taskName}}</span>
-                <span></span>
-            </li>
-        </ul>
+        <div class="btn-group">
+            <button v-on:click="toggleActive" v-bind:class="{active: isActive}" class="btn-tap">전체보기</button>
+            <button v-on:click="toggleActive" v-bind:class="{active: !isActive}" class="btn-tap">현재날짜보기</button>
+        </div>
+        <div class="list-container">
+            <ul v-bind:class="{active: isActive}" class="task-list list-all">
+                <h1>전체리스트</h1>
+                <li v-for="(item,index) in allTasks" v-bind:key="item.taskId">
+                    <span>{{index}}</span>
+                    <span>{{item.taskName}}</span>
+                    <span></span>
+                </li>
+            </ul>
+            <ul v-bind:class="{active: !isActive}" class="task-list list-date">
+                <h1>날짜리스트</h1>
+                <li v-for="(item, index) in dateList" :key="item.taskId">
+                    <span>{{index}}</span>
+                    <span>{{item.taskName}}</span>
+                    <span></span>
+                </li>
+            </ul>
+        </div>
+        
     </div>
     
   
@@ -16,6 +30,11 @@
 
 <script>
 export default {
+    data() {
+        return{
+            isActive: true,
+        }
+    },
     computed: {
         dateId(){
             return this.$store.state.dateId;
@@ -26,11 +45,51 @@ export default {
                 return element.taskDate === this.dateId;
             })
             return result;
+        },
+        allTasks() {
+            return this.$store.state.taskList;
+        }
+    },
+    methods: {
+        toggleActive(){
+            this.isActive = !this.isActive; 
         }
     }
 }
 </script>
 
 <style>
+.list-container {
+    position: relative;
+    height: 500px;
+    border: 1px solid black;
 
+}
+.task-list {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s ease-in-out;
+}
+.active {
+    opacity: 1;
+    visibility: visible;
+}
+.btn-group {
+    display: flex;
+}
+.btn-tap {
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 5px 5px 0 0;
+}
+.btn-tap.active {
+    background: gold;
+}
 </style>
