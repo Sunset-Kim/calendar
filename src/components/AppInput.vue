@@ -22,8 +22,9 @@ export default {
     },
     methods: {
         addNewTask(e){
+            console.log(this.dateID);
             e.preventDefault();
-            if(this.taskItem === '') {
+            if(this.taskItem === '' || this.dateID === undefined) {
                 // 모달을 실행하는 부분
                 return
             }

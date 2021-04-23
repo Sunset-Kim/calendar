@@ -21,7 +21,7 @@ export default {
             // dates: new Date('2021-04-24'),
             // },
         ],
-        date: new Date(),
+        date: '',
         }
     },
     components: {
@@ -29,6 +29,7 @@ export default {
     },
     methods: {
         pickDate(payload) {
+            console.log(payload);
             this.$store.commit('loadDate',payload);
         }
     }
