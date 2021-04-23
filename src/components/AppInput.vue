@@ -22,13 +22,15 @@ export default {
     },
     methods: {
         addNewTask(e){
-            console.log(this.dateId);
             e.preventDefault();
-            if(this.taskItem === '' || this.dateId === null) {
+            if(this.taskItem === '' || this.dateId === null || this.dateId === '') {
                 // 모달을 실행하는 부분
+                console.log('입력이 없거나 날짜값이 없습니다.')
+                this.taskItem = '';
                 return
             }
-            this.$store.commit('addNewTask', this.taskItem);
+            this.$store.commit('addNewTask');
+            this.taskItem = '';
         }
     }
     
