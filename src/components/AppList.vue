@@ -3,9 +3,9 @@
         <h1>여기는 테스트 코드입니다</h1>
         <h2>리스트의 컴퓨티드 데이터 입니다. {{dateId}}</h2>
         <ul>
-            <li v-for="(item, index) in dateList" :key="item.name">
+            <li v-for="(item, index) in dateList" :key="item.taskId">
                 <span>{{index}}</span>
-                <span>{{item.name}}</span>
+                <span>{{item.taskName}}</span>
                 <span></span>
             </li>
         </ul>

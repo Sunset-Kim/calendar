@@ -29,7 +29,16 @@ export const store = new Vuex.Store({
         state.dateId = payload.id;
       },
       addNewTask(state, taskItem) {
-        console.log(taskItem);
+        //전송(저장)할 데이터 오브젝트를 만든다.
+        let obj = {
+          taskId : state.dateId + taskItem,
+          taskName: taskItem,
+          taskDate: state.dateId,
+          completed: false,
+          time: new Date().getTime(),
+        }
+        state.taskList.push(obj);
+        localStorage.setItem(obj.taskId, JSON.stringify(obj))
       }
 
     }
