@@ -1,35 +1,26 @@
 <template>
   <div id="app">
-    <calendar v-on:load="print"></calendar>
-    <div>{{date}}</div>
-    <div>{{day}}</div>
+    <calendar></calendar>
+    <app-input></app-input>
+    <app-list></app-list>
   </div>
 </template>
 
 <script>
 import calendar from './components/calendar.vue'
+import AppList from './components/AppList.vue'
+import AppInput from './components/AppInput.vue'
 import {store} from './store/store.js'
 
 export default {
   name: 'App',
   data(){
-    return{
-     date: '',
-    }
-  },
-  computed: {
-    day(){
-      return new Date(this.date).getDate();
-    }
+    return{}
   },
   components: {
     calendar,
-  },
-  methods: {
-    print(payload) {
-      console.log(payload);
-      this.date = payload.date;
-    }
+    AppList,
+    AppInput,
   },
   store,
 }

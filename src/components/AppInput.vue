@@ -1,6 +1,9 @@
 <template>
   <div>
-      <input v-model="todoList" type="text" placeholder="add your task">
+      <form v-on:submit="addNewTask" action="">
+        <input v-model="taskItem" type="text" placeholder="add your task">
+        <button type="submit">add</button>
+      </form>
   </div>
 </template>
 
@@ -8,9 +11,26 @@
 export default {
     data() {
         return{
-            todoList: '',
+            taskItem: '',
+            isShown: false,
+        }
+    },
+    computed: {
+        dateId() {
+            return this.$store.state.dateId;
+        }
+    },
+    methods: {
+        addNewTask(e){
+            e.preventDefault();
+            if(this.taskItem === '') {
+                // 모달을 실행하는 부분
+                return
+            }
+            this.$store.commit('addNewTask', this.taskItem);
         }
     }
+    
 
 }
 </script>
