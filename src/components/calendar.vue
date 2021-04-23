@@ -51,13 +51,27 @@ export default {
 
 <style>
 #calendar {
-    margin-right: 20px;
+    height: 100%;
 }
-#calendar .vc-day {
-    min-height: 80px;
+#calendar .vc-container {
+    height: 100%;
 }
+#calendar #date-picker {
+    height: 100%;
+    border-radius: 0;
+}
+#calendar .vc-weeks {
+    height: calc(100% - 100px);
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: 50px repeat(6,1fr)
+}
+
 #calendar .vc-header {
-    padding: 50px;
+    height: 100px;
+    padding: 0 50px;
+}
+#calendar .vc-weeks .vc-weekday {
+    max-height: 50px;
 }
 #calendar .vc-weeks .vc-weekday:first-child{
     color: crimson;
