@@ -24,7 +24,9 @@ export const store = new Vuex.Store({
     },
     getters: {
       attDate(state){
-        return state.taskList.map(element => element.taskDate)
+        let date = state.taskList.map(element => element.taskDate);
+
+        return new Set(date);
       }
     },
     mutations: {
