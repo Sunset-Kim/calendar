@@ -21,7 +21,6 @@ export default {
         attrs() {
         let arr = [];
         let date = this.$store.getters.attDate;
-        console.log(date);
         date.forEach(element => {
             let obj = {
                 key: 'remainTask',
@@ -30,7 +29,6 @@ export default {
             }
             arr.push(obj);
         });
-        console.log(arr);
             return arr
         } 
     },

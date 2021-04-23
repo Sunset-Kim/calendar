@@ -51,6 +51,13 @@ export const store = new Vuex.Store({
           localStorage.setItem(obj.taskId, JSON.stringify(obj))
         }
        
+      },
+
+      toggleComplete(state,payload) {
+        const result = state.taskList.find(element => {
+          return element.taskId === payload.item.taskId;
+        });
+        result.completed = !result.completed;
       }
 
     }

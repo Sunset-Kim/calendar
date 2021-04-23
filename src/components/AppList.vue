@@ -7,10 +7,12 @@
         <div class="list-container">
             <ul v-bind:class="{active: isActive}" class="task-list list-all">
                 <h1>전체리스트</h1>
-                <li v-for="(item,index) in allTasks" v-bind:key="item.taskId">
-                    <span>{{index}}</span>
+                <li v-for="(item,index) in allTasks" v-bind:key="item.taskId" v-bind:class="{completed: item.completed}" class="task-item">
+                    <span v-on:click="toggleComplete(item,index)">
+                        <i class="fas fa-check-square"></i>
+                    </span>
                     <span>{{item.taskName}}</span>
-                    <span></span>
+                    <span><i class="fas fa-minus-circle"></i></span>
                 </li>
             </ul>
             <ul v-bind:class="{active: !isActive}" class="task-list list-date">
@@ -53,6 +55,9 @@ export default {
     methods: {
         toggleActive(){
             this.isActive = !this.isActive; 
+        },
+        toggleComplete(item,index) {
+            this.$store.commit('toggleComplete',{item,index});
         }
     }
 }
@@ -63,7 +68,6 @@ export default {
     position: relative;
     height: 500px;
     border: 1px solid black;
-
 }
 .task-list {
     position: absolute;
@@ -75,6 +79,9 @@ export default {
     opacity: 0;
     visibility: hidden;
     transition: 0.5s ease-in-out;
+}
+.task-item.completed {
+    background: red;
 }
 .active {
     opacity: 1;
