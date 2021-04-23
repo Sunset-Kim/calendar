@@ -9,7 +9,6 @@ const storage = {
     let arr = [];
     for(let i = 0; i < localStorage.length; i++) {
       if(localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-        console.log(localStorage.key(i))
         let element = localStorage.getItem(localStorage.key(i))
         arr.push(JSON.parse(element))
       }

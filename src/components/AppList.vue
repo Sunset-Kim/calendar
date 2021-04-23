@@ -21,7 +21,11 @@ export default {
             return this.$store.state.dateId;
         },
         dateList(){
-            return this.$store.state.taskList;
+            // 데이터 아이디에 맞는 리스트를 불러온다.
+            let result = this.$store.state.taskList.filter(element => {
+                return element.taskDate === this.dateId;
+            })
+            return result;
         }
     }
 }
