@@ -22,9 +22,9 @@ export default {
     },
     methods: {
         addNewTask(e){
-            console.log(this.dateID);
+            console.log(this.dateId);
             e.preventDefault();
-            if(this.taskItem === '' || this.dateID === undefined) {
+            if(this.taskItem === '' || this.dateId === null) {
                 // 모달을 실행하는 부분
                 return
             }
