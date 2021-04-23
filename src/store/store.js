@@ -34,7 +34,7 @@ export const store = new Vuex.Store({
           taskName: taskItem,
           taskDate: state.dateId,
           completed: false,
-          time: new Date().getTime(),
+          time: new Date(state.dateId).getTime(),
         }
         if(localStorage.getItem(obj.taskId)) {
           // list에서 받아가서 모달창을 on하는 기능
