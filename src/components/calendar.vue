@@ -14,15 +14,25 @@ import DatePicker from 'v-calendar/lib/components/date-picker.umd'
 export default {
     data() {
     return {
-        attrs: [
-            // {
-            // key: 'contain',
-            // dot: 'blue',
-            // dates: new Date('2021-04-24'),
-            // },
-        ],
         date: '',
         }
+    },
+    computed: {
+        attrs() {
+        let arr = [];
+        let date = this.$store.getters.attDate;
+        console.log(date);
+        date.forEach(element => {
+            let obj = {
+                key: 'remainTask',
+                dot: 'blue',
+                dates: new Date(element)
+            }
+            arr.push(obj);
+        });
+        console.log(arr);
+            return arr
+        } 
     },
     components: {
         DatePicker,

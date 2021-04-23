@@ -22,7 +22,11 @@ export const store = new Vuex.Store({
       taskList: storage.fetch(),
       dateId: '',
     },
-
+    getters: {
+      attDate(state){
+        return state.taskList.map(element => element.taskDate)
+      }
+    },
     mutations: {
       loadDate(state, payload) {
         state.dateId = payload.id;
