@@ -37,8 +37,15 @@ export const store = new Vuex.Store({
           completed: false,
           time: new Date().getTime(),
         }
-        state.taskList.push(obj);
-        localStorage.setItem(obj.taskId, JSON.stringify(obj))
+        if(localStorage.getItem(obj.taskId)) {
+          // list에서 받아가서 모달창을 on하는 기능
+          console.log('중복값입니다')
+          return
+        } else {
+          state.taskList.push(obj);
+          localStorage.setItem(obj.taskId, JSON.stringify(obj))
+        }
+       
       }
 
     }
