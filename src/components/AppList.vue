@@ -12,9 +12,10 @@
                         <i class="fas fa-check-square"></i>
                     </span>
                     <span>{{item.taskName}}</span>
-                    <span><i class="fas fa-minus-circle"></i></span>
+                    <span v-on:click="removeItem(item,index)" ><i class="fas fa-minus-circle"></i></span>
                 </li>
             </ul>
+            
             <ul v-bind:class="{active: !isActive}" class="task-list list-date">
                 <h1>날짜리스트</h1>
                 <li v-for="(item, index) in dateList" :key="item.taskId">
@@ -49,7 +50,7 @@ export default {
             return result;
         },
         allTasks() {
-            return this.$store.state.taskList;
+            return this.$store.getters.sortList;
         }
     },
     methods: {
@@ -58,6 +59,9 @@ export default {
         },
         toggleComplete(item,index) {
             this.$store.commit('toggleComplete',{item,index});
+        },
+        removeItem(item,index) {
+            this.$store.commit('removeTask',{item,index});
         }
     }
 }
