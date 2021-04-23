@@ -59,6 +59,7 @@ export const store = new Vuex.Store({
           console.log('중복값입니다')
           return
         } else {
+          console.log(obj);
           state.taskList.push(obj);
           localStorage.setItem(obj.taskId, JSON.stringify(obj))
         }

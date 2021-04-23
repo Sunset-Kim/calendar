@@ -1,11 +1,17 @@
 <template>
-    <DatePicker 
-    v-on:dayclick="pickDate"
-    v-model="date"
-    :value="null"
-    :is-expanded="true"
-    :attributes='attrs'
-     ></DatePicker>
+    <div id="calendar">
+        <DatePicker id="date-picker"
+        v-on:dayclick="pickDate"
+        v-model="date"
+        :value="null"
+        :is-dark="true"
+        color="purple"
+        :is-expanded="true"
+        :attributes="attrs"
+        title-position="left"
+        ></DatePicker>
+    </div>
+    
 </template>
 
 <script>
@@ -24,7 +30,7 @@ export default {
         date.forEach(element => {
             let obj = {
                 key: 'remainTask',
-                dot: 'blue',
+                dot: 'red',
                 dates: new Date(element)
             }
             arr.push(obj);
@@ -44,5 +50,22 @@ export default {
 </script>
 
 <style>
-
+#calendar {
+    margin-right: 20px;
+}
+#calendar .vc-day {
+    min-height: 80px;
+}
+#calendar .vc-header {
+    padding: 50px;
+}
+#calendar .vc-weeks .vc-weekday:first-child{
+    color: crimson;
+}
+#calendar .vc-weeks .vc-weekday:nth-child(7){
+    color: dodgerblue;
+}
+#calendar .vc-highlights {
+    transform: scale(1.2);
+}
 </style>

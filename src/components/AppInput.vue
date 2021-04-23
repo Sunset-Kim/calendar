@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app-input">
       <form v-on:submit="addNewTask" action="">
         <input v-model="taskItem" type="text" placeholder="add your task">
         <button type="submit">add</button>
@@ -29,7 +29,7 @@ export default {
                 this.taskItem = '';
                 return
             }
-            this.$store.commit('addNewTask');
+            this.$store.commit('addNewTask',this.taskItem);
             this.taskItem = '';
         }
     }

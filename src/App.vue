@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-    <calendar></calendar>
-    <app-input></app-input>
-    <app-list></app-list>
+    <div class="app-left">
+      <calendar></calendar>
+    </div>
+    <div class="app-right">
+      <app-input></app-input>
+      <app-list></app-list>
+    </div>
+    
+    
   </div>
 </template>
 
@@ -27,7 +33,14 @@ export default {
 </script>
 
 <style>
+@import url("~reset-css/reset.css");
+@import url('./css/style.css');
+
 #app {
-  
+  width: 100%;
+  display: flex;
+}
+.app-left {
+  width: 60%;
 }
 </style>

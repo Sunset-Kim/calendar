@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="app-list">
         <div class="btn-group">
             <button v-on:click="toggleActive" v-bind:class="{active: isActive}" class="btn-tap">전체보기</button>
             <button v-on:click="toggleActive" v-bind:class="{active: !isActive}" class="btn-tap">현재날짜보기</button>
@@ -19,9 +19,11 @@
             <ul v-bind:class="{active: !isActive}" class="task-list list-date">
                 <h1>날짜리스트</h1>
                 <li v-for="(item, index) in dateList" :key="item.taskId">
-                    <span>{{index}}</span>
+                    <span v-on:click="toggleComplete(item,index)">
+                        <i class="fas fa-check-square"></i>
+                    </span>
                     <span>{{item.taskName}}</span>
-                    <span></span>
+                    <span v-on:click="removeItem(item,index)" ><i class="fas fa-minus-circle"></i></span>
                 </li>
             </ul>
         </div>
