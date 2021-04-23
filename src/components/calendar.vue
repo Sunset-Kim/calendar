@@ -1,7 +1,6 @@
 <template>
     <DatePicker 
-    v-on:dayfocusin="pickDate"
-    v-on:dayfocusout="blurDate"
+    v-on:dayclick="pickDate"
     v-model="date"
     :value="null"
     :is-expanded="true"
@@ -40,10 +39,6 @@ export default {
         pickDate(payload) {
             this.$store.commit('loadDate',payload);
         },
-        blurDate() {
-            console.log('나는 잃었다')
-            this.$store.commit('blurDate');
-        }
     }
 }
 </script>

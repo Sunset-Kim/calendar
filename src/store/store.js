@@ -38,10 +38,11 @@ export const store = new Vuex.Store({
     mutations: {
       // 현재날짜를 받아옴
       loadDate(state, payload) {
-        state.dateId = payload.id;
-      },
-      blurDate(state) {
-        state.dateId = '';
+        if(state.dateId === payload.id) {
+          state.dateId = '';
+        } else {
+          state.dateId = payload.id;
+        }
       },
       // task를 등록함
       addNewTask(state, taskItem) {
