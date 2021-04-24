@@ -6,41 +6,58 @@
             <i class="fas fa-plus"></i>
         </button>
       </form>
+      <modal v-if="showModal" @close="showModal = false">
+            <h3 slot="header">안내메세지</h3>
+            <p slot="body">{{errorMsg}}</p>
+      </modal>
   </div>
 </template>
 
 <script>
+import modal from '../components/common/modal'
+
 export default {
     data() {
         return{
             taskItem: '',
             isShown: false,
+            showModal: false,
+            errorMsg: '',
         }
     },
     computed: {
         dateId() {
             return this.$store.state.dateId;
         }
+        
     },
     methods: {
         addNewTask(e){
             e.preventDefault();
-            if(this.taskItem === '' || this.dateId === null || this.dateId === '') {
-                // 모달을 실행하는 부분
-                console.log('입력이 없거나 날짜값이 없습니다.')
+            if(this.dateId === null || this.dateId === '') {
+                this.showModal = true;
+                this.errorMsg = `날짜가 선택되지 않았습니다. 캘린더에서 날짜를 선택해주세요`;
+                this.taskItem = '';
+                return
+            } else if (this.taskItem === '') {
+                this.showModal = true;
+                this.errorMsg = `입력값이 감지 되지 않았습니다.`
                 this.taskItem = '';
                 return
             }
             this.$store.commit('addNewTask',this.taskItem);
             this.taskItem = '';
         }
+    },
+    components: {
+        modal,
     }
     
 
 }
 </script>
 
-<style>
+<style scoped>
 #app-input form{
     position: relative;
 }
