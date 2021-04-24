@@ -4,7 +4,6 @@
         v-on:dayclick="pickDate"
         v-model="date"
         :value="null"
-        :is-dark="true"
         color="purple"
         :is-expanded="true"
         :attributes="attrs"
@@ -51,33 +50,35 @@ export default {
 
 <style>
 #calendar {
-    height: 100%;
+    
+}
+#calendar .vc-header {
+    height: 20%;
+    padding: 0 50px;
 }
 #calendar .vc-container {
     height: 100%;
 }
 #calendar #date-picker {
+    background: #E4475D;
+    color: white;
+    border: none;
+    border-radius: 50px 50px 0 0;
+}
+#calendar .vc-pane-layout {
     height: 100%;
-    border-radius: 0;
 }
 #calendar .vc-weeks {
-    height: calc(100% - 100px);
+    height: 80%;
     grid-template-columns: repeat(7,1fr);
     grid-template-rows: 50px repeat(6,1fr)
 }
 
-#calendar .vc-header {
-    height: 100px;
-    padding: 0 50px;
-}
+
 #calendar .vc-weeks .vc-weekday {
-    max-height: 50px;
-}
-#calendar .vc-weeks .vc-weekday:first-child{
-    color: crimson;
-}
-#calendar .vc-weeks .vc-weekday:nth-child(7){
-    color: dodgerblue;
+    /* max-height: 50px; */
+    color: white;
+    
 }
 #calendar .vc-highlights {
     transform: scale(1.2);

@@ -1,33 +1,31 @@
 <template>
     <div id="app-list">
         <div class="btn-group">
-            <button v-on:click="toggleActive" v-bind:class="{active: isActive}" class="btn-tap">전체보기</button>
-            <button v-on:click="toggleActive" v-bind:class="{active: !isActive}" class="btn-tap">현재날짜보기</button>
+            <button v-on:click="toggleActive" v-bind:class="{active: isActive}" class="btn btn-tap">전체보기</button>
+            <button v-on:click="toggleActive" v-bind:class="{active: !isActive}" class="btn btn-tap">현재날짜보기</button>
         </div>
         <div class="list-container">
             <ul v-bind:class="{active: isActive}" class="task-list list-all">
-                <h1>전체리스트</h1>
                 <li v-for="(item,index) in allTasks" v-bind:key="item.taskId" v-bind:class="{completed: item.completed}" class="task-item">
-                    <span v-on:click="toggleComplete(item,index)">
-                        <i class="fas fa-check-square"></i>
-                    </span>
-                    <span>{{item.taskName}}</span>
-                    <span v-on:click="removeItem(item,index)" ><i class="fas fa-minus-circle"></i></span>
+                    <div v-on:click="toggleComplete(item,index)" class="btn-complete"></div>
+                    <div class="task-content">
+                        <h6 class="task-content-date">{{item.taskDate}}</h6>
+                        <h4 class="task-content-name">{{item.taskName}}</h4>    
+                    </div>
+                    <div v-on:click="removeItem(item,index)" class="btn-remove" ><i class="fas fa-minus-circle"></i></div>
                 </li>
             </ul>
             
             <ul v-bind:class="{active: !isActive}" class="task-list list-date">
-                <h1>날짜리스트</h1>
                 <li v-for="(item, index) in dateList" :key="item.taskId">
-                    <span v-on:click="toggleComplete(item,index)">
+                    <div v-on:click="toggleComplete(item,index)" class="btn-complete">
                         <i class="fas fa-check-square"></i>
-                    </span>
-                    <span>{{item.taskName}}</span>
-                    <span v-on:click="removeItem(item,index)" ><i class="fas fa-minus-circle"></i></span>
+                    </div>
+                    <div class="task-content">{{item.taskName}}</div>
+                    <div v-on:click="removeItem(item,index)" class="btn-remove" ><i class="fas fa-minus-circle"></i></div>
                 </li>
             </ul>
         </div>
-        
     </div>
     
   
@@ -72,23 +70,79 @@ export default {
 <style>
 .list-container {
     position: relative;
-    height: 500px;
-    border: 1px solid black;
+    height: 150px;
+    border: 2px solid var(--primary-light);
+    border-radius: 0 20px 20px 20px;
+    overflow-y: scroll;
+    transform: translateY(-2px);
+}
+.list-container::-webkit-scrollbar {
+    display: none;
 }
 .task-list {
     position: absolute;
     left: 0;
     top: 0;
+    padding: 10px;
     width: 100%;
-    height: 100%;
-    border: 1px solid black;
     opacity: 0;
     visibility: hidden;
     transition: 0.5s ease-in-out;
 }
-.task-item.completed {
-    background: red;
+.task-item {
+    min-height: 50px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background: var(--primary-dark);
+    color: white;
+    overflow: hidden;
 }
+
+.task-item .btn-complete {
+    float: left;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    border: 1px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.task-item .task-content {
+    float: left;
+    width: calc(100% - 60px);
+}
+.task-item .task-content .task-content-date {
+    
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.task-item .btn-remove {
+    float: right;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.task-item .btn-remove:hover {
+    color: var(--secondary);
+}
+/* toggle-completed style */
+.task-item:hover {
+    background: var(--primary-dark);
+}
+.task-item.completed {
+    
+}
+.task-item.completed .task-content {
+    color: var(--primary-light);
+}
+.task-item.completed .task-content .task-content-name {
+    text-decoration: line-through;
+    font-style: italic;
+}
+.task-item.completed .btn-complete {
+    background: white;
+}
+/* tapmenu active style */
 .active {
     opacity: 1;
     visibility: visible;
@@ -96,13 +150,20 @@ export default {
 .btn-group {
     display: flex;
 }
+.btn-group {
+    position: relative;
+    height: 30px;
+    cursor: pointer;
+    z-index: 1;
+}
 .btn-tap {
-    border: none;
-    outline: none;
+    color: white;
     padding: 5px 10px;
+    background: var(--primary-light);
     border-radius: 5px 5px 0 0;
+    transition: 0.5s ease-in-out;
 }
 .btn-tap.active {
-    background: gold;
+    background: var(--secondary);
 }
 </style>
