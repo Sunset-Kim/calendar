@@ -1,7 +1,7 @@
 <template>
   <div id="app-input">
       <form v-on:submit="addNewTask" action="">
-        <input v-model="taskItem" type="text" placeholder="date select">
+        <input v-model="taskItem" ref="input" type="text" placeholder="date select">
         <button type="submit">
             <i class="fas fa-plus"></i>
         </button>
@@ -38,11 +38,14 @@ export default {
                 this.showModal = true;
                 this.errorMsg = `날짜가 선택되지 않았습니다. 캘린더에서 날짜를 선택해주세요`;
                 this.taskItem = '';
+                this.$refs.input.blur();
                 return
             } else if (this.taskItem === '') {
                 this.showModal = true;
                 this.errorMsg = `입력값이 감지 되지 않았습니다.`
                 this.taskItem = '';
+                this.$refs.input.blur();
+                this.
                 return
             }
             this.$store.commit('addNewTask',this.taskItem);
