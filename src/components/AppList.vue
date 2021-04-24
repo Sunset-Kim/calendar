@@ -17,11 +17,12 @@
             </ul>
             
             <ul v-bind:class="{active: !isActive}" class="task-list list-date">
-                <li v-for="(item, index) in dateList" :key="item.taskId">
-                    <div v-on:click="toggleComplete(item,index)" class="btn-complete">
-                        <i class="fas fa-check-square"></i>
+                <li v-for="(item, index) in dateList" :key="item.taskId" v-bind:class="{completed: item.completed}" class="task-item">
+                    <div v-on:click="toggleComplete(item,index)" class="btn-complete"></div>
+                    <div class="task-content">
+                        <h6 class="task-content-date">{{item.taskDate}}</h6>
+                        <h4 class="task-content-name">{{item.taskName}}</h4>    
                     </div>
-                    <div class="task-content">{{item.taskName}}</div>
                     <div v-on:click="removeItem(item,index)" class="btn-remove" ><i class="fas fa-minus-circle"></i></div>
                 </li>
             </ul>

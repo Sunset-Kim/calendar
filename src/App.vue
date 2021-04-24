@@ -46,9 +46,10 @@ export default {
 
 }
 #app {
+  max-width: 500px;
   width: 100%;
   height: 100%;
-  align-items: center;
+  margin: 0 auto;  
   border-radius: 30px;
   background: #252A48;
   overflow: hidden;

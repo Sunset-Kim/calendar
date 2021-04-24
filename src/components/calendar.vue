@@ -29,7 +29,7 @@ export default {
         date.forEach(element => {
             let obj = {
                 key: 'remainTask',
-                dot: 'red',
+                dot: 'yellow',
                 dates: new Date(element)
             }
             arr.push(obj);
@@ -71,7 +71,7 @@ export default {
 #calendar .vc-weeks {
     height: 80%;
     grid-template-columns: repeat(7,1fr);
-    grid-template-rows: 50px repeat(6,1fr)
+    grid-template-rows: 10% repeat(6,1fr)
 }
 
 
