@@ -1,8 +1,8 @@
 <template>
     <div id="app-list">            
         <div class="btn-group">
-            <button v-on:click="toggleActive" v-bind:class="{active: isActive}" class="btn btn-tap">All Task</button>
-            <button v-on:click="toggleActive" v-bind:class="{active: !isActive}" class="btn btn-tap">Selected Date Task</button>
+            <button v-on:click="toggleActive" v-bind:class="{active: isActive}" class="btn btn-tap">All Task ({{allTasksLength}})</button>
+            <button v-on:click="toggleActive" v-bind:class="{active: !isActive}" class="btn btn-tap">Selected Date Task ({{dateListLength}})</button>
             
         </div>
         <div class="list-container">
@@ -51,8 +51,14 @@ export default {
             })
             return result;
         },
+        dateListLength() {
+            return this.dateList.length;
+        },
         allTasks() {
             return this.$store.getters.sortList;
+        },
+        allTasksLength() {
+            return this.allTasks.length;
         }
     },
     methods: {
