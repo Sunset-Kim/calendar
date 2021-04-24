@@ -6,7 +6,7 @@
             
         </div>
         <div class="list-container">
-            <ul v-bind:class="{active: isActive}" class="task-list list-all">
+            <transition-group tag="ul" name="task-list" v-bind:class="{active: isActive}" class="task-list list-all">
                 <li v-for="(item,index) in allTasks" v-bind:key="item.taskId" v-bind:class="{completed: item.completed}" class="task-item">
                     <div v-on:click="toggleComplete(item,index)" class="btn-complete"></div>
                     <div class="task-content">
@@ -15,9 +15,9 @@
                     </div>
                     <div v-on:click="removeItem(item,index)" class="btn-remove" ><i class="fas fa-minus-circle"></i></div>
                 </li>
-            </ul>
+            </transition-group>
             
-            <ul v-bind:class="{active: !isActive}" class="task-list list-date">
+            <transition-group tag="ul" name="task-list" v-bind:class="{active: !isActive}" class="task-list list-date">
                 <li v-for="(item, index) in dateList" :key="item.taskId" v-bind:class="{completed: item.completed}" class="task-item">
                     <div v-on:click="toggleComplete(item,index)" class="btn-complete"></div>
                     <div class="task-content">
@@ -26,7 +26,7 @@
                     </div>
                     <div v-on:click="removeItem(item,index)" class="btn-remove" ><i class="fas fa-minus-circle"></i></div>
                 </li>
-            </ul>
+            </transition-group>
         </div>
     </div>
     
@@ -37,7 +37,7 @@
 export default {
     data() {
         return{
-            isActive: true,
+            isActive: false,
         }
     },
     computed: {
@@ -178,5 +178,15 @@ export default {
 }
 .btn-tap.active {
     background: var(--secondary);
+}
+
+/* transition group */
+
+.task-list-enter-active, .task-list-leave-active {
+  transition: all 1s;
+}
+.task-list-enter, .task-list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
