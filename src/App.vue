@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <div class="wrap">
-      <div id="app-title">
-      <h1>Schedule</h1>
-      </div>
+      <app-title></app-title>
       <app-list></app-list>
       <app-input></app-input>
     </div>
@@ -13,9 +11,10 @@
 </template>
 
 <script>
-import calendar from './components/calendar.vue'
-import AppList from './components/AppList.vue'
-import AppInput from './components/AppInput.vue'
+import calendar from './components/calendar.vue';
+import AppList from './components/AppList.vue';
+import AppInput from './components/AppInput.vue';
+import AppTitle from './components/AppTitle.vue'
 import {store} from './store/store.js'
 
 export default {
@@ -27,6 +26,7 @@ export default {
     calendar,
     AppList,
     AppInput,
+    AppTitle,
   },
   store,
 }
@@ -36,39 +36,41 @@ export default {
 @import url("~reset-css/reset.css");
 @import url('./css/style.css');
 :root {
-  --primary: #242947;
-  --primary-light: #4e5173;
-  --primary-dark: #000020;
+  --primary: #939597;
+  --primary-light: #c3c6c8;
+  --primary-dark: #656769;
 
-  --secondary: #e23d55;
-  --secondary-light: #ff7281;
-  --secondary-dark: #aa002d;
+  --secondary: #F5DF4D;
+  --secondary-light: #ffff80;
+  --secondary-dark: #bfae0e;
 
+  --text-white: white;
+  --text-primary: #2b2b2b;
+  --text-secondary: #555;
 }
 #app {
+  min-width: 300px;
   max-width: 500px;
   width: 100%;
   height: 100%;
   margin: 0 auto;  
   border-radius: 30px;
-  background: #252A48;
+  background: var(--primary);
   overflow: hidden;
+  color: var(--text-white)
 }
 #app .wrap {
   padding: 0 35px;
 }
 #app-title {
-  color: white;
+  height: 100px;
   padding: 40px 0 35px;
-  font-weight: 900;
-  align-self: flex-start;
-  font-size: 30px;
 }
 #app-input {
   text-align: center;
   padding: 20px;
 }
 #calendar {
-  height: calc(100% - 355px)
+  height: calc(100% - 350px)
 }
 </style>

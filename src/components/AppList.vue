@@ -1,8 +1,9 @@
 <template>
-    <div id="app-list">
+    <div id="app-list">            
         <div class="btn-group">
-            <button v-on:click="toggleActive" v-bind:class="{active: isActive}" class="btn btn-tap">전체보기</button>
-            <button v-on:click="toggleActive" v-bind:class="{active: !isActive}" class="btn btn-tap">현재날짜보기</button>
+            <button v-on:click="toggleActive" v-bind:class="{active: isActive}" class="btn btn-tap">All Task</button>
+            <button v-on:click="toggleActive" v-bind:class="{active: !isActive}" class="btn btn-tap">Selected Date Task</button>
+            
         </div>
         <div class="list-container">
             <ul v-bind:class="{active: isActive}" class="task-list list-all">
@@ -98,6 +99,7 @@ export default {
     background: var(--primary-dark);
     color: white;
     overflow: hidden;
+    transition: 0.3s ease-in-out;
 }
 
 .task-item .btn-complete {
@@ -108,6 +110,7 @@ export default {
     border: 1px solid white;
     border-radius: 50%;
     cursor: pointer;
+    transition: 0.2s ease-in-out;
 }
 .task-item .task-content {
     float: left;
@@ -128,10 +131,11 @@ export default {
 }
 /* toggle-completed style */
 .task-item:hover {
-    background: var(--primary-dark);
+    background: var(--secondary-light);
+    color: var(--text-secondary)
 }
-.task-item.completed {
-    
+.task-item:hover .btn-complete{
+    border: 1px solid var(--text-primary);
 }
 .task-item.completed .task-content {
     color: var(--primary-light);
@@ -141,7 +145,8 @@ export default {
     font-style: italic;
 }
 .task-item.completed .btn-complete {
-    background: white;
+    border: 1px solid var(--secondary);
+    background: var(--secondary)
 }
 /* tapmenu active style */
 .active {
@@ -158,7 +163,8 @@ export default {
     z-index: 1;
 }
 .btn-tap {
-    color: white;
+    color: var(--text-primary);
+    font-weight: bold;
     padding: 5px 10px;
     background: var(--primary-light);
     border-radius: 5px 5px 0 0;

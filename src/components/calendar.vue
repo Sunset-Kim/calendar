@@ -29,7 +29,7 @@ export default {
         date.forEach(element => {
             let obj = {
                 key: 'remainTask',
-                dot: 'yellow',
+                dot: 'purple',
                 dates: new Date(element)
             }
             arr.push(obj);
@@ -54,14 +54,18 @@ export default {
 }
 #calendar .vc-header {
     height: 20%;
-    padding: 0 50px;
+    padding: 0 45px;
+}
+#calendar .vc-arrows-container {
+    top: 10px;
+    right: 30px;
 }
 #calendar .vc-container {
     height: 100%;
 }
 #calendar #date-picker {
-    background: #E4475D;
-    color: white;
+    background: var(--secondary);
+    color: var(--text-secondary);
     border: none;
     border-radius: 50px 50px 0 0;
 }
@@ -70,15 +74,17 @@ export default {
 }
 #calendar .vc-weeks {
     height: 80%;
+    padding: 0 20px; 
     grid-template-columns: repeat(7,1fr);
     grid-template-rows: 10% repeat(6,1fr)
 }
-
-
 #calendar .vc-weeks .vc-weekday {
     /* max-height: 50px; */
-    color: white;
-    
+    color: #111;
+    font-weight: 900;
+}
+#calendar .vc-day {
+    min-height:fit-content;
 }
 #calendar .vc-highlights {
     transform: scale(1.2);
