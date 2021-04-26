@@ -13,7 +13,7 @@
                         <h6 class="task-content-date">{{item.taskDate}}</h6>
                         <h4 class="task-content-name">{{item.taskName}}</h4>    
                     </div>
-                    <div v-on:click="[removeItem(item,index)]" class="btn-remove" ><i class="fas fa-minus-circle"></i></div>
+                    <div v-on:click="[toggleModal(),saveTemp(item,index)]" class="btn-remove" ><i class="fas fa-minus-circle"></i></div>
                 </li>
             </transition-group>
             
@@ -24,33 +24,34 @@
                         <h6 class="task-content-date">{{item.taskDate}}</h6>
                         <h4 class="task-content-name">{{item.taskName}}</h4>    
                     </div>
-                    <div v-on:click="[removeItem(item,index)]" class="btn-remove" ><i class="fas fa-minus-circle"></i></div>
+                    <div v-on:click="[toggleModal(),saveTemp(item,index)]" class="btn-remove" ><i class="fas fa-minus-circle"></i></div>
                 </li>
             </transition-group>
         </div>
-<!-- 
+
         <modal v-if="showModal">
             <h3 slot="header">안내메세지</h3>
             <p slot="body">정말로 삭제하시겠습니까?</p>
-            <div slot="footer">
-                <button @click="toggleModal()">네</button>
+            <div class="footer-btn-group" slot="footer">
+                <button @click="[toggleModal(),removeItem()]">네</button>
                 <button @click="toggleModal()">아니요</button>
             </div>
-        </modal> -->
+        </modal>
+
     </div>
     
   
 </template>
 
 <script>
-// import modal from './common/modal'
+import modal from './common/modal'
 
 export default {
     data() {
         return{
             isActive: false,
-            // showModal: false,
-            // remove: false,
+            showModal: false,
+            Temp: '',
         }
     },
     computed: {
@@ -81,16 +82,18 @@ export default {
         toggleComplete(item,index) {
             this.$store.commit('toggleComplete',{item,index});
         },
-        // toggleModal(item, index) {
-        //     this.showModal = !this.showModal;
-        //     console.log(item,index);
-        // },
-        removeItem(item,index) {
-            this.$store.commit('removeTask',{item,index});
+        toggleModal() {
+            this.showModal = !this.showModal;
+        },
+        saveTemp(item, index) {
+            this.Temp = {item, index}
+        },
+        removeItem() {
+            this.$store.commit('removeTask',this.Temp);
         }
     },
     components: {
-        // modal,
+        modal,
     }
 }
 </script>
@@ -199,6 +202,14 @@ export default {
 }
 .btn-tap.active {
     background: var(--secondary);
+}
+/* modal slot */
+.footer-btn-group {
+    display: flex;
+    justify-content: space-around;
+}
+.footer-btn-group button{
+    width: 100px;
 }
 
 /* transition group */
