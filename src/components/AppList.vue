@@ -28,16 +28,29 @@
                 </li>
             </transition-group>
         </div>
+
+        <modal v-if="showModal">
+            <h3 slot="header">안내메세지</h3>
+            <p slot="body">정말로 삭제하시겠습니까?</p>
+            <div slot="footer">
+                <button @click="toggleModal()">네</button>
+                <button @click="toggleModal()">아니요</button>
+            </div>
+        </modal>
     </div>
     
   
 </template>
 
 <script>
+import modal from './common/modal'
+
 export default {
     data() {
         return{
             isActive: false,
+            showModal: false,
+            remove: false,
         }
     },
     computed: {
@@ -68,9 +81,16 @@ export default {
         toggleComplete(item,index) {
             this.$store.commit('toggleComplete',{item,index});
         },
+        toggleModal() {
+            this.showModal = !this.showModal;
+        },
         removeItem(item,index) {
+            // console.log(item,index);
             this.$store.commit('removeTask',{item,index});
         }
+    },
+    components: {
+        modal,
     }
 }
 </script>
@@ -104,6 +124,7 @@ export default {
     border-radius: 10px;
     background: var(--primary-dark);
     color: white;
+    word-break: break-all;
     overflow: hidden;
     transition: 0.3s ease-in-out;
 }

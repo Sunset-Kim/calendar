@@ -45,7 +45,6 @@ export default {
                 this.errorMsg = `입력값이 감지 되지 않았습니다.`
                 this.taskItem = '';
                 this.$refs.input.blur();
-                this.
                 return
             }
             this.$store.commit('addNewTask',this.taskItem);
